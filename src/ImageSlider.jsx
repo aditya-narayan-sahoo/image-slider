@@ -22,8 +22,13 @@ const ImageSlider = () => {
   }, [activeImageIndex]);
 
   return (
-    <div className="flex justify-center mt-10 gap-10">
-      <button onClick={handlePreviousImage}>Previous</button>
+    <div className="flex justify-center mt-10">
+      <button
+        className="bg-gray-400 h-10 p-2 my-auto mx-5 rounded hover:bg-gray-800 hover:text-white "
+        onClick={handlePreviousImage}
+      >
+        Previous
+      </button>
       {images.map((url, i) => (
         <img
           key={url}
@@ -35,7 +40,12 @@ const ImageSlider = () => {
           alt="carousel"
         />
       ))}
-      <button onClick={handlNextImage}>Next</button>
+      <button
+        className="bg-gray-400 h-10 p-2 my-auto mx-5 rounded hover:bg-gray-800 hover:text-white "
+        onClick={handlNextImage}
+      >
+        Next
+      </button>
     </div>
   );
 };
