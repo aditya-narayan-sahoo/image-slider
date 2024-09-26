@@ -1,44 +1,41 @@
-import { useState } from "react";
-
-const images = [
-  "https://wallhalla.com/thumbs/18",
-  "https://wallpapers.com/images/high/random-background-1920-x-1080-3k1zpqg6g46q1z37.webp",
-  "https://wallpapers.com/images/high/random-background-ky6jwiw1a3s5nc2u.webp",
-  "https://wallhalla.com/thumbs/17",
-  "https://wallhalla.com/thumbs/43",
-];
-
+import { useState, useEffect } from "react";
+import { images } from "./constants";
 const ImageSlider = () => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const handlePreviousImage = () => {
+    activeImageIndex === 0
+      ? setActiveImageIndex(images.length - 1)
+      : setActiveImageIndex(activeImageIndex - 1);
+  };
+
+  const handlNextImage = () => {
+    setActiveImageIndex((activeImageIndex + 1) % images.length);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handlNextImage();
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [activeImageIndex]);
+
   return (
     <div className="flex justify-center mt-10 gap-10">
-      <button
-        onClick={() => {
-          activeImageIndex === 0
-            ? setActiveImageIndex(images.length - 1)
-            : setActiveImageIndex(activeImageIndex - 1);
-        }}
-      >
-        Previous
-      </button>
+      <button onClick={handlePreviousImage}>Previous</button>
       {images.map((url, i) => (
         <img
           key={url}
           className={
-            `w-[630px] h-[360px] object-contain ` +
+            `w-[630px] h-[360px] rounded-xl object-contain ` +
             (activeImageIndex === i ? "block" : "hidden")
           }
           src={url}
           alt="carousel"
         />
       ))}
-      <button
-        onClick={() => {
-          setActiveImageIndex((activeImageIndex + 1) % images.length);
-        }}
-      >
-        Next
-      </button>
+      <button onClick={handlNextImage}>Next</button>
     </div>
   );
 };
