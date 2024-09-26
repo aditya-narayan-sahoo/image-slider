@@ -21,11 +21,17 @@ const ImageSlider = () => {
       >
         Previous
       </button>
-      <img
-        className="w-[630px] h-[360px] object-contain"
-        src={images[activeImageIndex]}
-        alt="carousel"
-      />
+      {images.map((url, i) => (
+        <img
+          key={url}
+          className={
+            `w-[630px] h-[360px] object-contain ` +
+            (activeImageIndex === i ? "block" : "hidden")
+          }
+          src={url}
+          alt="carousel"
+        />
+      ))}
       <button
         onClick={() => {
           setActiveImageIndex((activeImageIndex + 1) % images.length);
