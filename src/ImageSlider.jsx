@@ -1,5 +1,7 @@
+import { useState } from "react";
+
 const images = [
-  "https://wallpapers.com/images/high/random-background-1680-x-1080-p8npj4s3zlsvsbrf.webp",
+  "https://wallhalla.com/thumbs/18",
   "https://wallpapers.com/images/high/random-background-1920-x-1080-3k1zpqg6g46q1z37.webp",
   "https://wallpapers.com/images/high/random-background-ky6jwiw1a3s5nc2u.webp",
   "https://wallhalla.com/thumbs/17",
@@ -7,9 +9,30 @@ const images = [
 ];
 
 const ImageSlider = () => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   return (
-    <div className="flex justify-center mt-10">
-      <img className="w-[630px]" src={images[0]} />
+    <div className="flex justify-center mt-10 gap-10">
+      <button
+        onClick={() => {
+          activeImageIndex === 0
+            ? setActiveImageIndex(images.length - 1)
+            : setActiveImageIndex(activeImageIndex - 1);
+        }}
+      >
+        Previous
+      </button>
+      <img
+        className="w-[630px] h-[360px] object-contain"
+        src={images[activeImageIndex]}
+        alt="carousel"
+      />
+      <button
+        onClick={() => {
+          setActiveImageIndex((activeImageIndex + 1) % images.length);
+        }}
+      >
+        Next
+      </button>
     </div>
   );
 };

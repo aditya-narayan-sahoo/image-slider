@@ -1,5 +1,11 @@
+import ImageSlider from "./ImageSlider";
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <ImageSlider />
+    </div>
+  );
 };
 
 export default App;
